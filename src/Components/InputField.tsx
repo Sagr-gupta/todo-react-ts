@@ -8,17 +8,14 @@ interface Props {
 }
 
 const InputField = ({ todo, setTodo, handleAdd }: Props) => {
-  const inputRef = useRef<HTMLInputElement>(null);
   return (
     <form
       className="input"
       onSubmit={(e) => {
         handleAdd(e);
-        inputRef.current?.blur();
       }}
     >
       <input
-        ref={inputRef}
         type="input"
         placeholder="Enter a task"
         value={todo}
@@ -26,7 +23,7 @@ const InputField = ({ todo, setTodo, handleAdd }: Props) => {
         className="input__box"
       />
       <button className="input__submit" type="submit">
-        Go
+        Add
       </button>
     </form>
   );
