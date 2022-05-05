@@ -4,6 +4,7 @@ import "./App.css";
 import InputField from "./Components/InputField";
 import { Todo } from "./model";
 import TodoList from "./Components/TodoList";
+import { Text, Box } from "@chakra-ui/react";
 
 const App: React.FC = () => {
   const [todo, setTodo] = useState<string>("");
@@ -54,14 +55,33 @@ const App: React.FC = () => {
   return (
     <DragDropContext onDragEnd={onDragEnd}>
       <div className="App">
-        <span className="heading">Todo List</span>
+        <Text
+          align="center"
+          fontWeight="bold"
+          fontSize="5xl"
+          decoration="underline"
+        >
+          Todo List
+        </Text>
         <InputField todo={todo} setTodo={setTodo} handleAdd={handleAdd} />
-        <TodoList
-          todos={todos}
-          setTodos={setTodos}
-          completedTodos={completedTodos}
-          setCompletedTodos={setCompletedTodos}
-        />
+        <Box>
+          <div>
+            <Text
+              textAlign="center"
+              fontWeight={"bold"}
+              marginTop={"1rem"}
+              marginBottom={"1rem"}
+            >
+              All tasks
+            </Text>
+            <TodoList
+              todos={todos}
+              setTodos={setTodos}
+              completedTodos={completedTodos}
+              setCompletedTodos={setCompletedTodos}
+            />
+          </div>
+        </Box>
       </div>
     </DragDropContext>
   );

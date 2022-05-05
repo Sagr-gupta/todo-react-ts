@@ -1,9 +1,8 @@
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState } from "react";
 import { Todo } from "../model";
 import { AiFillEdit, AiFillDelete } from "react-icons/ai";
 import { MdDone } from "react-icons/md";
 import "./styles.css";
-import TodoList from "./TodoList";
 import { Draggable } from "react-beautiful-dnd";
 
 interface Props {
@@ -16,11 +15,6 @@ interface Props {
 const SingleTodo = ({ index, todo, todos, setTodos }: Props) => {
   const [edit, setEdit] = useState<boolean>(false);
   const [editTodo, setEditTodo] = useState<string>(todo.todo);
-
-  const inputRef = useRef<HTMLInputElement>(null);
-  useEffect(() => {
-    inputRef.current?.focus();
-  }, [edit]);
 
   const handleDone = (id: number) => {
     setTodos(
@@ -45,9 +39,9 @@ const SingleTodo = ({ index, todo, todos, setTodos }: Props) => {
 
   return (
     <Draggable draggableId={todo.id.toString()} index={index}>
-      {(provided, snapshot) => (
+      {(provided) => (
         <form
-          className={`todos__single ${snapshot.isDragging ? "drag" : ""}`}
+          className="todos__single"
           onSubmit={(e) => handleEdit(e, todo.id)}
           {...provided.draggableProps}
           {...provided.dragHandleProps}
@@ -58,7 +52,6 @@ const SingleTodo = ({ index, todo, todos, setTodos }: Props) => {
               value={editTodo}
               onChange={(e) => setEditTodo(e.target.value)}
               className="todos__single--text"
-              ref={inputRef}
             />
           ) : todo.isDone ? (
             <s className="todos__single--text">{todo.todo}</s>
